@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+  <h2>Мои товары</h2>
+  <a class="btn btn-primary" href="{{ url_for('seller_add_product') }}">+ Добавить товар</a>
+  <div class="grid" style="margin-top:16px">
+    {% for p in products %}
+    <div class="card">
+      <img src="{{ url_for('static', filename='uploads/products/' ~ (p.image or 'noimage.png')) }}">
+      <h3 style="margin:8px 0 4px">{{ p.title }}</h3>
+      <div style="opacity:.7">{{ "%.2f"|format(p.price) }} сомони</div>
+      <div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap">
+        <a class="btn" href="{{ url_for('seller_edit_product', product_id=p.id) }}">Редактировать</a>
+        <form method="post" action="{{ url_for('seller_delete_product', product_id=p.id) }}" onsubmit="return confirm('Удалить товар?')">
+          <button class="btn" type="submit">Удалить</button>
+        </form>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

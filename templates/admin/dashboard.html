@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+  <h2>Админ-панель</h2>
+  <div style="display:flex;gap:10px;flex-wrap:wrap">
+    <a class="btn" href="{{ url_for('admin_products') }}">Товары</a>
+    <a class="btn" href="{{ url_for('admin_add_product') }}">Добавить товар</a>
+    <a class="btn" href="{{ url_for('admin_banners') }}">Баннеры</a>
+    <a class="btn" href="{{ url_for('admin_logout') }}">Выйти</a>
+  </div>
+</div>
+{% endblock %}

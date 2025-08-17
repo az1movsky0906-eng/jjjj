@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+  <h2>Баннеры</h2>
+  <form method="post" enctype="multipart/form-data">
+    <label>Загрузить изображение</label>
+    <input type="file" name="banner" id="bannerInput">
+    <input type="hidden" name="crop_data" id="cropData">
+    <label>Ссылка (когда кликают по баннеру)</label>
+    <input type="url" name="target_url" placeholder="https://example.com" value="{{ last_url or '' }}">
+    <button class="btn btn-primary" type="submit">Сохранить</button>
+  </form>
+  <p style="opacity:.7">Можно обрезать изображение прямо здесь — выберите файл и выделите область.</p>
+  <div><img id="preview" style="max-width:100%;display:none"></div>
+</div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+<script>
+const input=document.getElementById('bannerInput');
+const preview=document.getElementById('preview');
+const cropDataField=document.getElementById('cropData');
+let cropper;
+input.addEventListener('change', e=>{
+  const file=e.target.files[0]; if(!file) return;
+  const reader=new FileReader();
+  reader.onload=()=>{ preview.src=reader.result; preview.style.display='block';
+    if(cropper) cropper.destroy();
+    cropper=new Cropper(preview,{aspectRatio:16/9});
+  };
+  reader.readAsDataURL(file);
+});
+document.querySelector('form').addEventListener('submit', ()=>{ if(cropper){ cropDataField.value=JSON.stringify(cropper.getData(true)); } });
+</script>
+{% endblock %}

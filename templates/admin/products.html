@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+  <h2>Товары</h2>
+  <a class="btn btn-primary" href="{{ url_for('admin_add_product') }}">+ Добавить товар</a>
+  <div class="grid" style="margin-top:16px">
+    {% for p in products %}
+    <div class="card">
+      <img src="{{ url_for('static', filename='uploads/products/' ~ (p.image or 'noimage.png')) }}">
+      <h3 style="margin:8px 0 4px">{{ p.title }}</h3>
+      <div style="opacity:.7">{{ "%.2f"|format(p.price) }} сомони</div>
+      <div>Избранный: {{ 'Да' if p.is_favorite else 'Нет' }}</div>
+      <div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap">
+        <a class="btn" href="{{ url_for('admin_edit_product', product_id=p.id) }}">Редактировать</a>
+        <form method="post" action="{{ url_for('admin_delete_product', product_id=p.id) }}" onsubmit="return confirm('Удалить товар?')">
+          <button class="btn" type="submit">Удалить</button>
+        </form>
+        <form method="post" action="{{ url_for('admin_toggle_favorite', product_id=p.id) }}">
+          <button class="btn" type="submit">{{ 'Убрать из избранных' if p.is_favorite else 'В избранные' }}</button>
+        </form>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

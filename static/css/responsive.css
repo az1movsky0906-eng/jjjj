@@ -1,0 +1,11 @@
+img{max-width:100%;height:auto}
+.container{width:100%;max-width:1200px;margin:0 auto;padding:0 16px}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+@media (max-width:1024px){.grid{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:768px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:480px){.grid{grid-template-columns:1fr}body{font-size:16px}}
+.card{border:1px solid #eee;border-radius:12px;padding:12px;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.btn{display:inline-block;padding:10px 14px;border-radius:10px;border:1px solid #ddd;text-decoration:none}
+.btn-primary{background:#0d6efd;color:#fff;border-color:#0d6efd}
+input,select,textarea{width:100%;padding:10px;border:1px solid #ddd;border-radius:8px}
+form{display:grid;gap:12px}

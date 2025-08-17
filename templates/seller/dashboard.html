@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+  <h2>Кабинет продавца</h2>
+  <div style="display:flex;gap:10px;flex-wrap:wrap">
+    <a class="btn" href="{{ url_for('seller_products') }}">Мои товары</a>
+    <a class="btn" href="{{ url_for('seller_add_product') }}">Добавить товар</a>
+    <a class="btn" href="{{ url_for('seller_logout') }}">Выйти</a>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+  <h2>{{ 'Редактировать товар' if product else 'Добавить товар' }}</h2>
+  <form method="post" enctype="multipart/form-data">
+    <label>Название</label>
+    <input name="title" value="{{ product.title if product else '' }}" required>
+    <label>Описание</label>
+    <textarea name="description">{{ product.description if product else '' }}</textarea>
+    <label>Цена (сомони)</label>
+    <input type="number" step="0.01" min="0" name="price" value="{{ product.price if product else '' }}" required>
+    <label>Фото</label>
+    {% if product and product.image %}
+      <img src="{{ url_for('static', filename='uploads/products/' ~ product.image) }}" style="max-width:200px;display:block;margin-bottom:8px">
+    {% endif %}
+    <input type="file" name="image">
+    <label><input type="checkbox" name="is_favorite" {% if product and product.is_favorite %}checked{% endif %}> В избранные</label>
+    <button class="btn btn-primary" type="submit">Сохранить</button>
+  </form>
+</div>
+{% endblock %}

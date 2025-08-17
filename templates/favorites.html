@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+  <h2>Избранные товары</h2>
+  <div class="grid" style="margin-top:16px">
+    {% for p in products %}
+    <a class="card" href="{{ url_for('product_view', product_id=p.id) }}" style="text-decoration:none;color:inherit">
+      <img src="{{ url_for('static', filename='uploads/products/' ~ (p.image or 'noimage.png')) }}">
+      <h3 style="margin:8px 0 4px">{{ p.title }}</h3>
+      <div style="opacity:.7">{{ "%.2f"|format(p.price) }} сомони</div>
+      <div class="btn" style="margin-top:6px">★ Избранный</div>
+    </a>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
