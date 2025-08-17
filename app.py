@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 """
 СпецТех — финальная сборка (Render-ready).
 - Регистрация по телефону + код (демо SMS в last_otp.txt)
@@ -458,7 +458,7 @@ from werkzeug.utils import secure_filename
 from PIL import Image
 
 app.config['SECRET_KEY'] = app.config.get('SECRET_KEY') or os.environ.get('SECRET_KEY', 'change-me-dev-secret')
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///data/app.db')
+app.config['SQLALCHEMY_DATABASE_URI'] = so.environ.get("database_url") 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 UPLOAD_DIR = os.path.join('static','uploads','products')
